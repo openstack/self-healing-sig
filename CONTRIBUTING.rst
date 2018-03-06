@@ -1,5 +1,5 @@
 =============================================
-Contributing to: self-healing-sig
+Contributing to OpenStack's self-healing SIG
 =============================================
 
 If you would like to contribute to the development of OpenStack, you must
