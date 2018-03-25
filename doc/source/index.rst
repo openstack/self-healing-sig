@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 self-healing-sig Design Specifications
-==================================================
+======================================
 
 .. toctree::
    :glob:
@@ -14,7 +14,7 @@ self-healing-sig Design Specifications
 
 
 self-healing-sig Repository Information
-===================================================
+=======================================
 
 .. toctree::
    :maxdepth: 2
