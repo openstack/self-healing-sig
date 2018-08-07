@@ -16,6 +16,7 @@ Contributions to this documentation are warmly encouraged; please see
 
    use-cases
    specs
+   eris/index
 
 
 Indices and tables
