@@ -1,9 +1,18 @@
+:orphan:
+
 =============================================
 Contributing to OpenStack's self-healing SIG
 =============================================
 
-If you would like to contribute to the development of OpenStack, you must
-follow the steps in this page:
+If you would like to participate in discussions or contribute in any
+way to the design and development of self-healing in OpenStack, please
+first see:
+
+  https://wiki.openstack.org/wiki/Self_healing_SIG
+
+Contributions to the use-cases and specifications in this repository
+are very welcome.  To contribute to this repository, you must follow
+the steps in this page:
 
    http://docs.openstack.org/infra/manual/developers.html
 

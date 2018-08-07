@@ -24,16 +24,24 @@ sys.path.insert(0, os.path.abspath('../..'))
 extensions = [
     'sphinx.ext.autodoc',
     #'sphinx.ext.intersphinx',
-    'oslosphinx',
+    'openstackdocstheme',
     'yasfb',
 ]
 
+html_theme = 'openstackdocs'
+
+# openstackdocstheme options
+repository_name = 'openstack/self-healing-sig'
+bug_project = '917'
+bug_tag = ''
+
 # Feed configuration for yasfb
 feed_base_url = 'http://specs.openstack.org/openstack/self-healing-sig'
-feed_author = 'OpenStack Development Team'
+feed_author = 'OpenStack Self-healing SIG'
 
 exclude_patterns = [
-    'template.rst',
+    'specs/template.rst',
+    'use-cases/template.rst',
 ]
 
 # Optionally allow the use of sphinxcontrib.spelling to verify the
@@ -55,7 +63,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'self-healing-sig'
+project = u'Self-healing SIG'
 copyright = u'%s, OpenStack Foundation' % datetime.date.today().year
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
@@ -69,25 +77,6 @@ add_module_names = True
 pygments_style = 'sphinx'
 
 # -- Options for HTML output --------------------------------------------------
-
-# The theme to use for HTML and HTML Help pages.  Major themes that come with
-# Sphinx are currently 'default' and 'sphinxdoc'.
-# html_theme_path = ["."]
-# html_theme = '_theme'
-# html_static_path = ['static']
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = '%sdoc' % project
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass
-# [howto/manual]).
-latex_documents = [
-    ('index',
-     '%s.tex' % project,
-     u'%s Documentation' % project,
-     u'OpenStack Foundation', 'manual'),
-]
 
 # Example configuration for intersphinx: refer to the Python standard library.
 #intersphinx_mapping = {'http://docs.python.org/': None}

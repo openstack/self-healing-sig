@@ -1,32 +1,25 @@
-.. self-healing-sig documentation master file, created by
-   sphinx-quickstart on Tue Jul  9 22:26:36 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+==========================
+OpenStack Self-healing SIG
+==========================
 
-self-healing-sig Design Specifications
-======================================
+This documentation relates to some of the initiatives of OpenStack's
+Self-healing SIG (Special Interest Group).  For more information on
+the SIG itself, see `the SIG's home page on the wiki
+<https://wiki.openstack.org/wiki/Self-healing_SIG>`_.
 
-.. toctree::
-   :glob:
-   :maxdepth: 2
+Contributions to this documentation are warmly encouraged; please see
+:doc:`the guide to contributing <meta/CONTRIBUTING>`.
 
-   specs/*
-
-
-self-healing-sig Repository Information
-=======================================
 
 .. toctree::
    :maxdepth: 2
 
-   README <readme>
-   contributing
+   use-cases
+   specs
 
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
