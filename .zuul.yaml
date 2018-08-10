@@ -1,4 +1,4 @@
 - project:
     name: openstack/self-healing-sig
     templates:
-      - build-openstack-sphinx-docs
+      - publish-openstack-sphinx-docs
