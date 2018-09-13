@@ -1,0 +1,218 @@
+heat_template_version: rocky
+description: AutoScaling a selfhealing cluster
+parameters:
+  image:
+    type: string
+    description: Image used for servers
+  key:
+    type: string
+    description: SSH key to connect to the servers
+  flavor:
+    type: string
+    description: flavor used by the web servers
+  security_group:
+    type: string
+    description: security_group used by the web servers
+  network:
+    type: string
+    description: Network used by the server
+  subnet:
+    type: string
+    description: subnet on which the load balancer will be located
+  external_network:
+    type: string
+    description: UUID or Name of a Neutron external network
+resources:
+  start_container_agent:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: ungrouped
+      config: {get_file: ./start-container-agent.sh}
+
+  asg:
+    type: OS::Heat::AutoScalingGroup
+    properties:
+      min_size: 2
+      desired_capacity: 2
+      max_size: 6
+      rolling_updates:
+          min_in_service: 1
+          max_batch_size: 1
+          pause_time: 10
+      resource:
+        type: lb_server.yaml
+        properties:
+          root_stack_id: {get_param: "OS::stack_id"}
+          flavor: {get_param: flavor}
+          external_network: {get_param: external_network}
+          security_group: {get_param: security_group}
+          image: {get_param: image}
+          key_name: {get_param: key}
+          network: {get_param: network}
+          subnet: {get_param: subnet}
+          pool_id: {get_resource: pool}
+          metadata: {"metering.server_group": {get_param: "OS::stack_id"}}
+          user_data: {get_attr: [start_container_agent, config]}
+
+  web_server_scaleup_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: asg}
+      cooldown: 60
+      scaling_adjustment: 1
+  web_server_scaledown_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: asg}
+      cooldown: 60
+      scaling_adjustment: -1
+  scaleup_policy_percent:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: percent_change_in_capacity
+      auto_scaling_group_id: {get_resource: asg}
+      cooldown: 5
+      scaling_adjustment: 50
+      min_adjustment_step: 1
+  scaledown_policy_percent:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: percent_change_in_capacity
+      auto_scaling_group_id: {get_resource: asg}
+      cooldown: 5
+      scaling_adjustment: -50
+      min_adjustment_step: 1
+  cpu_alarm_high:
+    type: OS::Aodh::GnocchiAggregationByResourcesAlarm
+    properties:
+      description: Scale up if CPU > 80%
+      metric: cpu_util
+      aggregation_method: mean
+      granularity: 600
+      evaluation_periods: 1
+      threshold: 80
+      resource_type: instance
+      comparison_operator: gt
+      alarm_actions:
+        - str_replace:
+            template: trust+url
+            params:
+              url: {get_attr: [web_server_scaleup_policy, signal_url]}
+      query:
+        list_join:
+          - ''
+          - - {'=': {server_group: {get_param: "OS::stack_id"}}}
+  cpu_alarm_low:
+    type: OS::Aodh::GnocchiAggregationByResourcesAlarm
+    properties:
+      description: Scale down if CPU < 15% for 10 minutes
+      metric: cpu_util
+      aggregation_method: mean
+      granularity: 600
+      evaluation_periods: 1
+      threshold: 15
+      resource_type: instance
+      comparison_operator: lt
+      alarm_actions:
+        - str_replace:
+            template: trust+url
+            params:
+              url: {get_attr: [web_server_scaledown_policy, signal_url]}
+      query:
+        list_join:
+          - ''
+          - - {'=': {server_group: {get_param: "OS::stack_id"}}}
+
+
+
+  lb:
+    type: OS::Octavia::LoadBalancer
+    #type: OS::Neutron::LBaaS::LoadBalancer
+    properties:
+      vip_subnet: {get_param: subnet}
+  listener:
+    type: OS::Octavia::Listener
+    #type: OS::Neutron::LBaaS::Listener
+    properties:
+      loadbalancer: {get_resource: lb}
+      protocol: HTTP
+      protocol_port: 80
+  pool:
+    type: OS::Octavia::Pool
+    #type: OS::Neutron::LBaaS::Pool
+    properties:
+      listener: {get_resource: listener}
+      lb_algorithm: ROUND_ROBIN
+      protocol: HTTP
+      #session_persistence:
+      #  type: SOURCE_IP
+      #
+  lb_monitor:
+    #type: OS::Neutron::LBaaS::HealthMonitor
+    type: OS::Octavia::HealthMonitor
+    properties:
+      pool: { get_resource: pool }
+      type: TCP
+      delay: 5
+      max_retries: 5
+      timeout: 5
+
+
+  # assign a floating ip address to the load balancer
+  # pool.
+  lb_floating:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: {get_param: external_network}
+      port_id: {get_attr: [lb, vip_port_id]}
+
+outputs:
+  scale_up_url:
+    description: >
+      This URL is the webhook to scale up the autoscaling group.  You
+      can invoke the scale-up operation by doing an HTTP POST to this
+      URL; no body nor extra headers are needed.
+    value: {get_attr: [web_server_scaleup_policy, alarm_url]}
+  scale_dn_url:
+    description: >
+      This URL is the webhook to scale down the autoscaling group.
+      You can invoke the scale-down operation by doing an HTTP POST to
+      this URL; no body nor extra headers are needed.
+    value: {get_attr: [web_server_scaledown_policy, alarm_url]}
+  scale_up_percent_url:
+    value: {get_attr: [scaleup_policy_percent, signal_url]}
+  scale_down_percent_url:
+    value: {get_attr: [scaledown_policy_percent, signal_url]}
+  pool_ip_address:
+    value: {get_attr: [lb, vip_address]}
+    description: The IP address of the load balancing pool
+  website_url:
+    value:
+      str_replace:
+        template: http://host/rico.html
+        params:
+          host: { get_attr: [lb_floating, floating_ip_address] }
+    description: >
+      This URL is the "external" URL that can be used to access the
+      Wordpress site.
+  gnocchi_query:
+    value:
+      str_replace:
+        template: >
+          gnocchi measures aggregation --resource-type instance
+          --query 'server_group="stackval"'
+          --granularity 300 --aggregation mean -m cpu_util
+        params:
+          stackval: { get_param: "OS::stack_id" }
+    description: >
+      This is a Gnocchi query for statistics on the cpu_util measurements about
+      OS::Nova::Server instances in this stack. The --resource-type select the
+      type of Gnocchi resource. The --query parameter filters resources
+      according to its attributes. When a VM's metadata includes an item of the
+      form metering.server_group=X, the corresponding Gnocchi resource has a
+      attribute named server_group that can queried with 'server_group="X"' In
+      this case the nested stacks give their VMs metadata that is passed as a
+      nested stack parameter, and this stack passes a metadata of the form
+      metering.server_group=X, where X is this stack's ID.

@@ -9,3 +9,4 @@ a starting point.
    :maxdepth: 1
 
    use-cases/nic-failure-affects-instance-and-app.rst
+   use-cases/heat-mistral-aodh.rst
