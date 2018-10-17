@@ -8,4 +8,4 @@ a starting point.
    :glob:
    :maxdepth: 1
 
-   use-cases/vitrage-mistral-integration.rst
+   use-cases/nic-failure-affects-instance-and-app.rst
