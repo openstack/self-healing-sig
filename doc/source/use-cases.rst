@@ -10,3 +10,4 @@ a starting point.
 
    use-cases/nic-failure-affects-instance-and-app.rst
    use-cases/heat-mistral-aodh.rst
+   use-cases/fenix-rolling-upgrade.rst
