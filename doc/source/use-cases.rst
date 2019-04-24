@@ -8,7 +8,4 @@ a starting point.
    :glob:
    :maxdepth: 1
 
-   use-cases/nic-failure-affects-instance-and-app.rst
-   use-cases/heat-mistral-aodh.rst
-   use-cases/fenix-rolling-upgrade.rst
-   use-cases/memory-leak.rst
+   use-cases/*

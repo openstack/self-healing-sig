@@ -7,3 +7,5 @@ starting point.
 .. toctree::
    :glob:
    :maxdepth: 1
+
+   specs/*
