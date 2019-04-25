@@ -69,7 +69,7 @@ Milestones
 ----------
 
 Target Milestone for completion:
-  Stein-1
+  Train-1
 
 Work Items
 ----------
