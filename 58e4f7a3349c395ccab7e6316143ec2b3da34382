@@ -1,0 +1,8 @@
+Code-Review+2: Adam Spiers <aspiers@suse.com>
+Workflow+1: Adam Spiers <aspiers@suse.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 25 Apr 2019 17:46:21 +0000
+Reviewed-on: https://review.opendev.org/655742
+Project: openstack/self-healing-sig
+Branch: refs/heads/master
