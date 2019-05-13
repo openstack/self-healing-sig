@@ -1,0 +1,10 @@
+Code-Review+2: Adam Spiers <aspiers@suse.com>
+Code-Review+1: Gautam Divgi <gautamdivgi@gmail.com>
+Code-Review+2: Eric Kao <ekcs.openstack@gmail.com>
+Workflow+1: Adam Spiers <aspiers@suse.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 13 May 2019 10:28:25 +0000
+Reviewed-on: https://review.opendev.org/658070
+Project: openstack/self-healing-sig
+Branch: refs/heads/master
