@@ -1,15 +1,11 @@
 ..
-  This template is intended to encourage a certain level of consistency
-  between different use cases.  However strict adherence to the structure
-  of this template is not required.
+  This template is intended to encourage a certain level of
+  consistency between different use cases.  Adherence to the structure
+  of this template is recommended but not strictly required.
 
-  This template should be in ReSTructured text. The filename in the git
-  repository should match the launchpad URL, for example a URL of
-  https://blueprints.launchpad.net/self-healing-sig/+spec/awesome-thing should be named
-  awesome-thing.rst .  Please do not delete any of the sections in this
-  template.  If you have nothing to say for a whole section, just write: None
-  For help with syntax, see http://sphinx-doc.org/rest.html
-  To test out your formatting, see http://www.tele3.cz/jbar/rest/rest.html
+  This template should be in ReSTructured text.  For help with syntax,
+  see <http://sphinx-doc.org/rest.html>. To test out your formatting,
+  see <http://www.tele3.cz/jbar/rest/rest.html>.
 
 =======================================
 The title of your self-healing use case
