@@ -17,6 +17,7 @@ Contributions to this documentation are warmly encouraged; please see
    use-cases
    specs
    eris/index
+   testing/tools-list
 
 
 Indices and tables
