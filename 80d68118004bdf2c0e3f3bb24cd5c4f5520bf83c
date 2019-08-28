@@ -1,0 +1,11 @@
+Code-Review+2: Adam Spiers <aspiers@suse.com>
+Code-Review+1: Rico Lin <rico.lin.guanyu@gmail.com>
+Code-Review+1: Tomi Juvonen <tomi.juvonen@nokia.com>
+Code-Review+2: Eric Kao <ekcs.openstack@gmail.com>
+Workflow+1: Adam Spiers <aspiers@suse.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 28 Aug 2019 17:22:48 +0000
+Reviewed-on: https://review.opendev.org/675138
+Project: openstack/self-healing-sig
+Branch: refs/heads/master
