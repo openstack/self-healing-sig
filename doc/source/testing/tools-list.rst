@@ -18,29 +18,30 @@ with a unified solution.
 Here is list of tools and the testing features that are provided by
 those (as of August 2019):
 
-=================================== ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
-        Tools/Features              Control Data    Performance Scalability Concurrency Disruptions/ OpenStack  Report     Active community [#]_
-                                    plane   plane   testing     testing     testing     Failure      Deployment generation
-                                    testing testing                                     injection
-=================================== ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
-Rally_ (Uses Tempest)               X               X           X           X           X            X          X          `Medium <https://github.com/openstack/rally/graphs/contributors>`__
-Yardstick_                          X       X       X           X           X                        X          X          `NA since May 2019 <https://git.opnfv.org/yardstick/stats/?period=m&ofs=10>`__
-Tempest_                            X               X                                                                      `High <https://opendev.org/openstack/tempest/commits/branch/master>`__
-Shaker_                                     X       X                                                X          X          `Low <https://opendev.org/performa/shaker/commits/branch/master>`__
-OS-Faults_                                                                              X                                  `NA since February 2019 <https://github.com/openstack/os-faults/graphs/contributors>`__
-KloudBuster_                                X       X           X                                               X          `NA since June 2019 <https://github.com/openstack/kloudbuster/graphs/contributors>`__
-HA-Failure-Test_ (Uses Tempest)     X                                                   X                                  `NA since November 2016 <https://github.com/avdhoot07/HA-Failure-TEST/graphs/contributors>`__
-Cloud99_                            X       X                                           X                       X          `NA since May 2017 <https://github.com/cisco-oss-eng/Cloud99/graphs/contributors>`__
-Browbeat_ (Uses Rally and Shaker)   X       X       X           X                                    X                     `High <https://github.com/cloud-bulldozer/browbeat/graphs/contributors>`__
-Harbinger_                                  X                                                                              `Low <https://github.com/att-comdev/harbinger/graphs/contributors>`__
-Enos_ (Uses Rally and Shaker)       X       X       X                                                X          X          `NA since May 2019 <https://github.com/BeyondTheClouds/enos/graphs/contributors>`__
-Chaostoolkit-openstack_                                                                 X                       X          `NA since April 2019 <https://github.com/chaostoolkit-incubator/chaostoolkit-openstack/graphs/contributors>`__
-Jepsen_ (not specific to OpenStack)                                                     X                       X          `High <https://github.com/jepsen-io/jepsen/graphs/contributors>`__
-OPNFV-Doctor_                                                                           X                                  `NA since April 2019 <https://gerrit.opnfv.org/gerrit/gitweb?p=doctor.git;a=summary>`__
-Stepler_ (Uses OS-faults)                                                               X                                  `NA since February 2019 <https://github.com/Mirantis/stepler/graphs/contributors>`__
-NFVbench_                                   X       X                                                           X          `Medium <https://github.com/opnfv/nfvbench/graphs/contributors>`__
-Eris_ (In development)              X       X       X           X           X           X                       X          `NA since November 2017 <https://github.com/LCOO/eris>`__
-=================================== ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
+=================================== ======= ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
+        Tools/Features              Control Data    Storage Performance Scalability Concurrency Disruptions/ OpenStack  Report     Active community [#]_
+                                    plane   plane   plane   testing     testing     testing     Failure      Deployment generation
+                                    testing testing testing                                     injection
+=================================== ======= ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
+Rally_ (Uses Tempest)               X                       X           X           X           X            X          X          `Medium <https://github.com/openstack/rally/graphs/contributors>`__
+Yardstick_                          X       X       X       X           X           X                        X          X          `NA since May 2019 <https://git.opnfv.org/yardstick/stats/?period=m&ofs=10>`__
+Tempest_                            X                       X                                                                      `High <https://opendev.org/openstack/tempest/commits/branch/master>`__
+Shaker_                                     X               X                                                X          X          `Low <https://opendev.org/performa/shaker/commits/branch/master>`__
+OS-Faults_                                                                                      X                                  `NA since February 2019 <https://github.com/openstack/os-faults/graphs/contributors>`__
+KloudBuster_                                X       X       X           X                                               X          `NA since June 2019 <https://github.com/openstack/kloudbuster/graphs/contributors>`__
+HA-Failure-Test_ (Uses Tempest)     X                                                           X                                  `NA since November 2016 <https://github.com/avdhoot07/HA-Failure-TEST/graphs/contributors>`__
+Cloud99_                            X       X                                                   X                       X          `NA since May 2017 <https://github.com/cisco-oss-eng/Cloud99/graphs/contributors>`__
+Browbeat_ (Uses Rally and Shaker)   X       X               X           X                                    X                     `High <https://github.com/cloud-bulldozer/browbeat/graphs/contributors>`__
+Harbinger_                                  X       X                                                                              `Low <https://github.com/att-comdev/harbinger/graphs/contributors>`__
+Enos_ (Uses Rally and Shaker)       X       X               X                                                X          X          `NA since May 2019 <https://github.com/BeyondTheClouds/enos/graphs/contributors>`__
+Chaostoolkit-openstack_                                                                         X                       X          `NA since April 2019 <https://github.com/chaostoolkit-incubator/chaostoolkit-openstack/graphs/contributors>`__
+Jepsen_ (not specific to OpenStack)                                                             X                       X          `High <https://github.com/jepsen-io/jepsen/graphs/contributors>`__
+OPNFV-Doctor_                                                                                   X                                  `NA since April 2019 <https://gerrit.opnfv.org/gerrit/gitweb?p=doctor.git;a=summary>`__
+Stepler_ (Uses OS-faults)                                                                       X                                  `NA since February 2019 <https://github.com/Mirantis/stepler/graphs/contributors>`__
+NFVbench_                                   X       X       X           X                                               X          `Medium <https://github.com/opnfv/nfvbench/graphs/contributors>`__
+VMTP_                                       X               X                                                           X          `Low <https://opendev.org/x/vmtp/commits/branch/master>`__
+Eris_ (In development)              X       X               X           X           X           X                       X          `NA since November 2017 <https://github.com/LCOO/eris>`__
+=================================== ======= ======= ======= =========== =========== =========== ============ ========== ========== ==============================================================================================================
 
 .. [#] Commits per month: Low<5, Medium<15, High=>15, NA=No Activity
 
@@ -101,7 +102,7 @@ possible as well.
 -  Report generation
 
 Network load generation, testing and benchmarking. Based on 'iperf(3)'
-and 'netperf' -> network testing topologies
+and 'netperf' -> network testing topologies.
 
 .. _OS-Faults:
 
@@ -122,7 +123,7 @@ Used by Rally to introduce faults.
 -  Benchmarking of data plane and storage services in OpenStack
 
 A fully integrated framework which is easy to use with basic knowledge
-of OpenStack but isn't flexible or programmable to do everything.
+of OpenStack.
 
 .. _HA-Failure-Test:
 
@@ -144,7 +145,7 @@ of OpenStack but isn't flexible or programmable to do everything.
 -  Runner: Perform actual tests with disruptions
 -  All 3 runs as seperate threads and parallel
 
-Makes use of Rally runner
+Makes use of Rally runner.
 
 .. _Browbeat:
 
@@ -168,8 +169,8 @@ Makes use of Rally runner
 
 .. _Enos:
 
-`Enos <https://github.com/BeyondTheClouds/enos>`__
-==================================================
+`Enos <https://enos.readthedocs.io/en/stable/>`__
+=================================================
 
 -  Deployment of OpenStack on VMs or bare metal
 -  Setup with different configurations
@@ -200,7 +201,7 @@ A minimal chaostoolkit driver for OpenStack compute resources.
 -  Checkers for analyzing history
 
 Not specific to OpenStack but general library for distributed systems,
-written in Clojure
+written in Clojure.
 
 .. _OPNFV-Doctor:
 
@@ -222,7 +223,7 @@ written in Clojure
 -  Test the availability of OpenStack cluster incase of node/service
    failure(s)
 
-Make use of os-faults
+Make use of os-faults.
 
 .. _NFVbench:
 
@@ -231,7 +232,20 @@ Make use of os-faults
 
 -  Measure network performance in OpenStack
 -  Data plane performance testing
+-  Benchmarking NFVi platforms and packet paths that are critical for NFV workloads
 
+Adjusted more for NFV workloads.
+
+.. _VMTP:
+
+`VMTP <https://vmtp.readthedocs.io/en/latest/>`__
+=================================================
+
+-  Benchmarking VM to VM data path performance measurement
+-  Latency measurement
+-  TCP/UDP throughput measurement
+
+Similar to NFVbench but more adapted towards enterprise workloads.
 
 .. _Eris:
 
